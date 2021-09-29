@@ -1,0 +1,88 @@
+THM - OWASP TOP 10 (Part 1 of 3)
+==================================================================
+https://tryhackme.com/room/owasptop10
+github.com/ttnovo/OWASP_Part1
+by: TTNOVO 
+==================================================================
+If you use own VM you need to use VPN.
+
+1. Download your VPN file on THM, find it and do: sudo openvpn FILE.ovpn
+2. Hit your password and you ready to dive in...
+
+Disclaimer: Never hack anything, that you are not allowed to hack!
+==================================================================
+TASK 5:
+
+This is a pretty long room, so I will be short in my answers so it wont
+be to much to read. Use the tryhackme room to find information that I
+havent put on this writeup. I have also jumped over the reading 
+tasks in this writeup since you can read them byself.
+
+Navigate to http://10.10.57.81/evilshell.php. () reveals the command... 
+------------------------------------------------------------------
+1.What strange text file is in the website root directory?
+Answer: drpepper.txt (ls)
+
+2.How many non-root/non-service/non-daemon users are there?
+Answer: 0 (cat /etc/passwd)
+
+3. What user is this app running as?
+Answer: www-data (whoami)
+
+4. What is the user's shell set as?
+Answer: /usr/sbin/nologin (cat /etc/passwd)
+
+5. What version of Ubuntu is running?
+Answer: 18.04.4 (lsb_release -a)
+
+6. Print out the MOTD.  What favorite beverage is shown?
+Answer: Dr Pepper (cat /etc/update-motd.d/00-header)
+
+===================================================================
+TASK 7:
+
+1. http://10.10.234.53:8888
+2. Register darren (It will tell you alredy exist, good!)
+3. Than register again, dont forget the space in beginning of darren.
+4. Now login with same credentials, and you get your first flag!
+
+1. What is the flag that you found in darren's account?
+Answer: fe86079416a21a3c99937fea8874b667
+
+Now try to do the same trick and see if you can login as arthur.
+
+2. What is the flag that you found in arthur's account?
+Answer: d9ac0f7db4fda460ac3edeb75d75e16e
+===================================================================
+TASK 11:
+
+(deploy the machine from task 8)
+
+IP: 10.10.130.245
+
+1. Navigate with IP to the website
+2. Go to login page
+3. Right click > inspect, (here you find the answer for question 1)
+4. IP/assets/ (here you find the answer for qeestion 2)
+5. press to download webapp.db, navigate to it!
+6. "file webapp.db" (we see its a SQLite3 file)
+7. sqlite3 webapp.db
+8. ".tables"
+10. SELECT * FROM users; (you should find hash for question 3)
+11. Go to crackstation website, crack the hash for question 4!
+12. Login with admin with this password, and you have the flag!
+
+1. What is the name of the mentioned directory?
+Answer: /assets
+
+2. What file stands out as being likely to contain sensitive data?
+Answer: webapp.db
+
+3. What is the password hash of the admin user?
+Answer: 6eea9b7ef19179a06954edd0f6c05ceb
+
+4. What is the admin's plaintext password?
+Answer: qwertyuiop
+
+5. Login as the admin. What is the flag?
+Answer: THM{Yzc2YjdkMjE5N2VjMzNhOTE3NjdiMjdl}
